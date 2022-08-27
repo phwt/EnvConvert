@@ -5,10 +5,21 @@ namespace EnvConvert
 {
     public class Converter
     {
-        private string Format { get; set; } = "Docker";
-        private bool IncludeEmpty { get; set; } = true;
-        private string Separator { get; set; } = "Colon";
-        private string YamlFormat { get; set; } = "DockerCompose";
+        private readonly OutputFormat _format;
+        private readonly YamlFormat _yamlFormat;
+        private readonly Separator _separator;
+        private readonly bool _includeEmpty;
+
+        public Converter(OutputFormat format = OutputFormat.dotenv,
+                         YamlFormat yamlFormat = YamlFormat.dockercompose,
+                         Separator separator = Separator.colon,
+                         bool includeEmpty = true)
+        {
+            _format = format;
+            _yamlFormat = yamlFormat;
+            _includeEmpty = includeEmpty;
+            _separator = separator;
+        }
 
         /// <summary>
         /// Convert JSON string into environment variables format
@@ -34,30 +45,25 @@ namespace EnvConvert
 
                     var sb = new StringBuilder();
 
-                    string format = Format switch
+                    string format = _format switch
                     {
-                        "Yaml" when YamlFormat == "Kubernetes" => "- name: \"{0}\"\n" + "  value: \"{1}\"",
-                        "Yaml" when YamlFormat == "AzureAppSettings" =>
+                        OutputFormat.yaml when _yamlFormat == YamlFormat.dockercompose => "- name: \"{0}\"\n" + "  value: \"{1}\"",
+                        OutputFormat.yaml when _yamlFormat == YamlFormat.kubernetes =>
                             "{{\r\n    \"name\": \"{0}\",\r\n    \"value\": \"{1}\",\r\n    \"slotSetting\": false\r\n}},",
-                        "Yaml" => "\"{0}\": \"{1}\"",
+                        OutputFormat.yaml => "\"{0}\": \"{1}\"",
                         _ => "{0}={1}"
                     };
 
                     foreach ((string key, string value) in configurationRoot.AsEnumerable()
-                        .Where(pair => IncludeEmpty || !string.IsNullOrEmpty(pair.Value))
-                        .OrderBy(pair => pair.Key))
+                                                                            .Where(pair => _includeEmpty || !string.IsNullOrEmpty(pair.Value))
+                                                                            .OrderBy(pair => pair.Key))
                     {
-                        string key2 = key;
-                        if (Separator == "Underscore")
-                        {
-                            key2 = key2.Replace(":", "__");
-                        }
-                        sb.AppendFormat(format, key2, value);
+                        string resultKey = (_separator == Separator.underscore) ? key.Replace(":", "__") : key;
+                        sb.AppendFormat(format, resultKey, value);
                         sb.AppendLine();
                     }
 
                     return sb.ToString();
-
                 }
                 catch
                 {
