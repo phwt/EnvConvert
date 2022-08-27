@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EnvConvert
 {
-    public class JsonConverter
+    public class Converter
     {
         private string Format { get; set; } = "Docker";
         private bool IncludeEmpty { get; set; } = true;
@@ -16,6 +16,7 @@ namespace EnvConvert
         /// Modified from original JsonToEnvironmentConverter
         /// Source: https://github.com/flcdrg/JsonToEnvironmentConverter/blob/master/JsonToEnvironmentConverter/Pages/Index.cshtml.cs
         /// </summary>
+        public string FromJSON(string input)
         {
             if (!string.IsNullOrEmpty(input))
             {

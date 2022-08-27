@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvConvert", "EnvConvert.csproj", "{A611D63F-5DDF-4B23-B805-8FCFABE0F7BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvConvert", "EnvConvert\EnvConvert.csproj", "{38EA1C86-3046-48F4-B47F-79FDF6BC206E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A611D63F-5DDF-4B23-B805-8FCFABE0F7BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A611D63F-5DDF-4B23-B805-8FCFABE0F7BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A611D63F-5DDF-4B23-B805-8FCFABE0F7BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A611D63F-5DDF-4B23-B805-8FCFABE0F7BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38EA1C86-3046-48F4-B47F-79FDF6BC206E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38EA1C86-3046-48F4-B47F-79FDF6BC206E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38EA1C86-3046-48F4-B47F-79FDF6BC206E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38EA1C86-3046-48F4-B47F-79FDF6BC206E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

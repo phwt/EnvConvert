@@ -6,7 +6,7 @@ namespace EnvConvert
     {
         private static async Task<int> Main(string[] args)
         {
-            var fileOption = new Option<FileInfo?>(name: "--file", description: "Input file");
+            var fileOption = new Option<FileInfo?>(new string[] { "--file", "-f" }, "Input file");
 
             var rootCommand = new RootCommand("CLI Tools for converting configurations into environment variables format");
             rootCommand.AddOption(fileOption);
@@ -14,10 +14,9 @@ namespace EnvConvert
             {
                 if (file != null)
                 {
-                    var jsonStr = File.ReadAllText(file.FullName);
-                    var jc = new JsonConverter();
-                    var res = jc.Convert(jsonStr);
-                    System.Console.WriteLine(res);
+                    var jsonString = File.ReadAllText(file.FullName);
+                    var result = new Converter().FromJSON(jsonString);
+                    System.Console.WriteLine(result);
                 }
             },
             fileOption);
