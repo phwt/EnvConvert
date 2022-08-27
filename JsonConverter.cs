@@ -10,7 +10,12 @@ namespace EnvConvert
         private string Separator { get; set; } = "Colon";
         private string YamlFormat { get; set; } = "DockerCompose";
 
-        public string Convert(string input)
+        /// <summary>
+        /// Convert JSON string into environment variables format
+        /// 
+        /// Modified from original JsonToEnvironmentConverter
+        /// Source: https://github.com/flcdrg/JsonToEnvironmentConverter/blob/master/JsonToEnvironmentConverter/Pages/Index.cshtml.cs
+        /// </summary>
         {
             if (!string.IsNullOrEmpty(input))
             {
