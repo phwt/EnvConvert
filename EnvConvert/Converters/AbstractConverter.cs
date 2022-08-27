@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace EnvConvert
 {
     public abstract class AbstractConverter
@@ -19,5 +21,43 @@ namespace EnvConvert
         }
 
         abstract public string Convert(string input);
+
+        /// <summary>
+        /// Apply formatting to the key/value pair in the format according to the options
+        /// </summary>
+        /// <returns>Formatted string</returns>
+        protected string ApplyFormat(IEnumerable<KeyValuePair<string, string>> values, char defaultSeparator = ':')
+        {
+            var format = _format switch
+            {
+                OutputFormat.yaml when _yamlFormat == YamlFormat.dockercompose => "- name: \"{0}\"\n" + "  value: \"{1}\"",
+                OutputFormat.yaml when _yamlFormat == YamlFormat.kubernetes => "{{\r\n    \"name\": \"{0}\",\r\n    \"value\": \"{1}\",\r\n    \"slotSetting\": false\r\n}},",
+                OutputFormat.yaml => "\"{0}\": \"{1}\"",
+                _ => "{0}={1}"
+            };
+
+            var sb = new StringBuilder();
+            var filteredValue = values.Where(pair => _includeEmpty || !string.IsNullOrEmpty(pair.Value))
+                                      .OrderBy(pair => pair.Key);
+
+            foreach ((string key, string value) in filteredValue)
+            {
+                string resultKey = key;
+                switch (_separator)
+                {
+                    case Separator.colon:
+                        resultKey = key.Replace(defaultSeparator.ToString(), ":");
+                        break;
+                    case Separator.underscore:
+                        resultKey = key.Replace(defaultSeparator.ToString(), "__");
+                        break;
+                }
+
+                sb.AppendFormat(format, resultKey, value);
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
+        }
     }
 }
