@@ -44,7 +44,7 @@ namespace EnvConvert
 
             // TODO: Find an easier way to pass a lot of options
             jsonCommand.SetHandler((fileOption, outputOption, formatOption, yamlFormatOption, separatorOption, includeEmptyOption) =>
-                InputOutputHandler(fileOption, outputOption, new Converter(formatOption, yamlFormatOption, separatorOption, includeEmptyOption).FromJSON),
+                InputOutputHandler(fileOption, outputOption, new JsonConverter(formatOption, yamlFormatOption, separatorOption, includeEmptyOption).Convert),
             fileOption, outputOption, formatOption, yamlFormatOption, separatorOption, includeEmptyOption);
 
             return await rootCommand.InvokeAsync(args);

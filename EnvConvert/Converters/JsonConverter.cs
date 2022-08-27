@@ -3,23 +3,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace EnvConvert
 {
-    public class Converter
+    public class JsonConverter : AbstractConverter
     {
-        private readonly OutputFormat _format;
-        private readonly YamlFormat _yamlFormat;
-        private readonly Separator _separator;
-        private readonly bool _includeEmpty;
-
-        public Converter(OutputFormat format = OutputFormat.dotenv,
-                         YamlFormat yamlFormat = YamlFormat.dockercompose,
-                         Separator separator = Separator.colon,
-                         bool includeEmpty = true)
-        {
-            _format = format;
-            _yamlFormat = yamlFormat;
-            _includeEmpty = includeEmpty;
-            _separator = separator;
-        }
+        public JsonConverter(OutputFormat format = OutputFormat.dotenv,
+                             YamlFormat yamlFormat = YamlFormat.dockercompose,
+                             Separator separator = Separator.colon,
+                             bool includeEmpty = true) : base(format, yamlFormat, separator, includeEmpty) { }
 
         /// <summary>
         /// Convert JSON string into environment variables format
@@ -27,7 +16,7 @@ namespace EnvConvert
         /// Modified from original JsonToEnvironmentConverter
         /// Source: https://github.com/flcdrg/JsonToEnvironmentConverter/blob/master/JsonToEnvironmentConverter/Pages/Index.cshtml.cs
         /// </summary>
-        public string FromJSON(string input)
+        public override string Convert(string input)
         {
             if (!string.IsNullOrEmpty(input))
             {
