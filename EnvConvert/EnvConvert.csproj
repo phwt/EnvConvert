@@ -3,6 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <Version>1.0.0</Version>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>envconvert</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
