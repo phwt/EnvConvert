@@ -30,8 +30,8 @@ namespace EnvConvert
         {
             var format = _format switch
             {
-                OutputFormat.yaml when _yamlFormat == YamlFormat.dockercompose => "- name: \"{0}\"\n" + "  value: \"{1}\"",
-                OutputFormat.yaml when _yamlFormat == YamlFormat.kubernetes => "{{\r\n    \"name\": \"{0}\",\r\n    \"value\": \"{1}\",\r\n    \"slotSetting\": false\r\n}},",
+                OutputFormat.yaml when _yamlFormat == YamlFormat.kubernetes => "- name: \"{0}\"\n" + "  value: \"{1}\"",
+                OutputFormat.yaml when _yamlFormat == YamlFormat.azureappsettings => "{{\r\n    \"name\": \"{0}\",\r\n    \"value\": \"{1}\",\r\n    \"slotSetting\": false\r\n}},",
                 OutputFormat.yaml => "\"{0}\": \"{1}\"",
                 _ => "{0}={1}"
             };
