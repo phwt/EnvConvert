@@ -27,7 +27,7 @@ namespace EnvConvert
                     builder.AddJsonStream(stream);
 
                     var configurationRoot = builder.Build();
-                    base.ApplyFormat(configurationRoot.AsEnumerable());
+                    return base.ApplyFormat(configurationRoot.AsEnumerable());
                 }
                 catch (Exception e)
                 {
