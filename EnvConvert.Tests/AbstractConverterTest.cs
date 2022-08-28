@@ -18,7 +18,6 @@ public class AbstractConverterTest
         public string PublicApplyFormat(IEnumerable<KeyValuePair<string, string>> values, char defaultSeparator = ':') => base.ApplyFormat(values, defaultSeparator);
     }
 
-
     private readonly Dictionary<string, string> _inputConfiguration = new Dictionary<string, string>()
     {
         { "ConnectionStrings", "" },

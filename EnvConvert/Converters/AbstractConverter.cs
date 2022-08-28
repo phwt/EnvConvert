@@ -42,16 +42,12 @@ namespace EnvConvert
 
             foreach ((string key, string value) in filteredValue)
             {
-                string resultKey = key;
-                switch (_separator)
+                string resultKey = _separator switch
                 {
-                    case Separator.colon:
-                        resultKey = key.Replace(defaultSeparator.ToString(), ":");
-                        break;
-                    case Separator.underscore:
-                        resultKey = key.Replace(defaultSeparator.ToString(), "__");
-                        break;
-                }
+                    Separator.colon => key.Replace(defaultSeparator.ToString(), ":"),
+                    Separator.underscore => key.Replace(defaultSeparator.ToString(), "__"),
+                    _ => key
+                };
 
                 sb.AppendFormat(format, resultKey, value);
                 sb.AppendLine();
