@@ -19,14 +19,14 @@ namespace EnvConvert.Tests
         }
 
         private readonly Dictionary<string, string> _inputConfiguration = new Dictionary<string, string>()
-    {
-        { "ConnectionStrings", "" },
-        { "ConnectionStrings:DefaultConnection", "Database=master;Server=(local);Integrated Security=SSPI;" },
-        { "Tags", "" },
-        { "Tags:0", ".NET" },
-        { "Tags:1", "" },
-        { "Tags:1:Type", "Tools" },
-    };
+        {
+            { "ConnectionStrings", "" },
+            { "ConnectionStrings:DefaultConnection", "Database=master;Server=(local);Integrated Security=SSPI;" },
+            { "Tags", "" },
+            { "Tags:0", ".NET" },
+            { "Tags:1", "" },
+            { "Tags:1:Type", "Tools" },
+        };
 
         [Fact]
         public void ApplyFormatDotenvTest()
